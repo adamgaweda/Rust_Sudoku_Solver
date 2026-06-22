@@ -110,9 +110,9 @@ pub fn solve(sudoku: &mut [[u8; 9]; 9], fixed: &[[bool; 9]; 9], show_progress: b
     let start = Instant::now();
 
     const T_START: f64 = 0.5;
-    const COOLING: f64 = 0.999;
-    const ITER_PER_RUN: usize = 10000;
-    const MAX_RESTARTS: usize = 100;
+    const COOLING: f64 = 0.999_95;
+    const ITER_PER_RUN: usize = 100_000;
+    const MAX_RESTARTS: usize = 200;
     const DISPLAY_EVERY: usize = 10_000;
     const RESYNC_EVERY: usize = 50_000;
 
@@ -120,6 +120,7 @@ pub fn solve(sudoku: &mut [[u8; 9]; 9], fixed: &[[bool; 9]; 9], show_progress: b
     let mut total_iter: usize = 0;
     let mut temp = T_START;
     let mut energy : i32;
+    let mut delta :i32;
 
     if show_progress {
         fill_squares(sudoku);
@@ -162,8 +163,9 @@ pub fn solve(sudoku: &mut [[u8; 9]; 9], fixed: &[[bool; 9]; 9], show_progress: b
             let p2 = candidates[i2];
 
 
-            let delta = energy_count(sudoku, p1, p2);
+            delta = -1 * energy_count(sudoku, p1, p2);
             change_state(sudoku, p1, p2);
+            delta += energy_count(sudoku, p1, p2);
 
             if delta <= 0 {
                 energy += delta;
