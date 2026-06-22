@@ -1,5 +1,3 @@
-// ANSI terminal display module — no external dependencies, pure Rust
-// Uses clear-screen approach for live animation (robust, no line-count issues)
 
 // ── Color codes ───────────────────────────────────────────────────────────────
 const RESET: &str = "\x1b[0m";
@@ -22,7 +20,6 @@ const CURSOR_SHOW: &str = "\x1b[?25h";
 /// Clear screen and move cursor to top-left
 const HOME: &str = "\x1b[2J\x1b[H";
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
 
 fn has_conflict(sudoku: &[[u8; 9]; 9], row: usize, col: usize) -> bool {
     let val = sudoku[row][col];
@@ -57,7 +54,6 @@ fn cell_str(sudoku: &[[u8; 9]; 9], map: &[[bool; 9]; 9], row: usize, col: usize)
     }
 }
 
-// ── Board renderer ────────────────────────────────────────────────────────────
 
 fn render_board(sudoku: &[[u8; 9]; 9], map: &[[bool; 9]; 9]) -> String {
     let box_bg = |row: usize, col: usize| -> &'static str {
@@ -130,7 +126,6 @@ fn render_header() -> String {
     )
 }
 
-// ── Public API ────────────────────────────────────────────────────────────────
 
 /// First draw — sets up the screen.
 pub fn print_sudoku_initial(sudoku: &[[u8; 9]; 9], map: &[[bool; 9]; 9], energy: i32, t_start: f64) {
