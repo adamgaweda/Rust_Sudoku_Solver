@@ -1,1 +1,29 @@
-/target
+# Rust / Cargo
+/target/
+**/*.rs.bk
+*.bk
+
+# Environment & secrets
+.env
+.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+!.env.example
+
+# JetBrains IDEs (RustRover, CLion, IntelliJ IDEA)
+.idea/
+*.iml
+cmake-build-*/
+
+# Visual Studio Code
+.vscode/
+
+# OS and system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Crash logs and debug traces
+*.log
